@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>DSS Pemilih HP - Custom Bobot</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-container">
+    <h1>
+        <span>📱 DSS.HP</span>
+    </h1>
+    <div class="subhead">Atur bobot • Bandingkan sesuai prioritasmu</div>
+
+    <!-- PAGE 1: BOBOT + JUMLAH HP -->
+    <div id="page1" class="page">
+        <div class="card">
+            <div style="margin-bottom: 8px; font-weight: 600;">🎚️ Atur Bobot Kepentingan (total = 1.0)</div>
+            
+            <div class="slider-group">
+                <div class="slider-header">
+                    <span class="criteria-icon">🚀 RAM</span>
+                    <span class="weight-value" id="ramWeightVal">0.25</span>
+                </div>
+                <input type="range" id="ramWeight" min="0" max="1" step="0.01" value="0.25">
+            </div>
+            <div class="slider-group">
+                <div class="slider-header">
+                    <span class="criteria-icon">💾 Storage</span>
+                    <span class="weight-value" id="storageWeightVal">0.25</span>
+                </div>
+                <input type="range" id="storageWeight" min="0" max="1" step="0.01" value="0.25">
+            </div>
+            <div class="slider-group">
+                <div class="slider-header">
+                    <span class="criteria-icon">💰 Harga</span>
+                    <span class="weight-value" id="priceWeightVal">0.25</span>
+                </div>
+                <input type="range" id="priceWeight" min="0" max="1" step="0.01" value="0.25">
+            </div>
+            <div class="slider-group">
+                <div class="slider-header">
+                    <span class="criteria-icon">🔋 Baterai (mAh)</span>
+                    <span class="weight-value" id="batteryWeightVal">0.25</span>
+                </div>
+                <input type="range" id="batteryWeight" min="0" max="1" step="0.01" value="0.25">
+            </div>
+            <div class="total-weight">
+                Total bobot: <strong id="totalWeightDisplay">1.00</strong>
+            </div>
+        </div>
+
+        <div class="input-field">
+            <label>📊 Berapa HP yang mau dibandingkan?</label>
+            <input type="number" id="hpCount" min="2" max="8" value="3" step="1">
+            <div class="small-note" style="margin-top: 10px;">Min 2, max 8 HP biar gak ribet</div>
+        </div>
+
+        <button class="btn btn-primary" id="nextToPage2">➡️ Lanjut isi spesifikasi</button>
+        <div id="page1Error" class="error-msg"></div>
+        <div class="note" style="margin-top: 16px;">💡 Bobot RAM & storage & baterai: makin besar makin bagus.<br> Harga: makin murah makin bagus (cost).</div>
+    </div>
+
+    <!-- PAGE 2: INPUT SPESIFIKASI & HASIL -->
+    <div id="page2" class="page hidden">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+            <button class="btn-outline" id="backToPage1" style="width: auto; padding: 10px 20px; margin:0;">← Edit Bobot</button>
+            <span style="font-weight: 600;">Isi data HP</span>
+        </div>
+
+        <div id="hpFormsContainer"></div>
+        
+        <button class="btn btn-primary" id="calculateBtn">⚡ Hitung & Ranking</button>
+        <div id="page2Error" class="error-msg"></div>
+
+        <div id="resultSection" class="result-panel hidden">
+            <div style="font-weight: 700; margin-bottom: 16px; font-size: 1.2rem;">🏆 Hasil Perankingan</div>
+            <div id="rankingList"></div>
+            <div id="detailMatrix" style="margin-top: 18px; font-size: 0.85rem; background: #1e293b; padding: 12px; border-radius: 18px;"></div>
+        </div>
+        <div class="note">*Normalisasi: RAM/Storage/Baterai dibagi nilai tertinggi, Harga dibalik (min/max)</div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
